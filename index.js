@@ -24,16 +24,22 @@ function draw(e){
     if (!isDrawing) return;
     ctx.beginPath();
     //ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
-    ctx.moveTo(lastX,lastY);
+    
 
     if (e.touches) {  //e.touches[0] refers to the first touch point in the array, which is the first touch point that was detected. 
-        // const rect = canvas.getBoundingClientRect();
-        const touchX = e.touches[0].clientX;
-        const touchY = e.touches[0].clientY;
-        ctx.lineTo(touchX, touchY);
-        lastX = touchX;
-        lastY = touchY;
+        const rect = canvas.getBoundingClientRect();
+        const x = e.touches[0].clientX - rect.left;
+        const y = e.touches[0].clientY - rect.top;
+        if (lastX === 0 && lastY === 0) { // Check if this is the first touch in the stroke
+            ctx.moveTo(x, y);
+          } else {
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(x, y);
+          }
+        lastX = x;
+        lastY = y;
       } else {
+        ctx.moveTo(lastX,lastY);
         ctx.lineTo(e.offsetX,e.offsetY);
       lastX = e.offsetX;
       lastY = e.offsetY;
@@ -64,11 +70,19 @@ canvas.addEventListener('mousedown', (e) => {
 canvas.addEventListener('touchstart', (e) => {
     e.preventDefault();
     isDrawing = true;
+    const rect = canvas.getBoundingClientRect();
+    [lastX, lastY] = [e.touches[0].clientX - rect.left, e.touches[0].clientY - rect.top];
+   
     [lastX, lastY] = [e.touches[0].clientX, e.touches[0].clientY];
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
 });
 
 canvas.addEventListener('mousemove', draw);
-canvas.addEventListener('touchmove', draw);
+canvas.addEventListener('touchmove', (e) => {
+    e.preventDefault();
+    draw(e);
+  });
 
 canvas.addEventListener('mouseup', () => isDrawing = false);
 canvas.addEventListener('mouseout', () => isDrawing = false);
