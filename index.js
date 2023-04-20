@@ -62,8 +62,13 @@ const canvas = document.getElementById('draw');
 const toolbar = document.getElementById('toolbar');
 const ctx = canvas.getContext("2d");
 
+function resizeCanvas(){
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
 ctx.linejoin = 'round';
 ctx.lineCap = 'round';
 ctx.lineWidth = 5;

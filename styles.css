@@ -25,7 +25,10 @@ body {
 }
 
 #draw {
-  /* border: 1px solid blue; */
+  border-radius: 8px;
+  box-shadow: 0 0 10px #888888;
+  overflow: hidden;
+  margin: 2%;
 }
 
 #toolbar {
@@ -34,7 +37,7 @@ body {
   flex-direction: column;
   width: var(--toolbar-width);
   padding-inline: 10px;
-  box-shadow: 0 0 10px #888888;
+  /* box-shadow: 0 0 10px #888888; */
 }
 
 .logo {
