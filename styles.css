@@ -16,6 +16,7 @@ body {
   padding: 0;
   height: 100%;
   width: 100%;
+  overflow: hidden;
 }
 
 .logo {
@@ -34,16 +35,19 @@ body {
   display: flex;
   position: relative;
 }
-.drawing-board {
-  overflow: hidden;
+.container > * {
+  border: 1px solid #ff0000;
 }
+
 #draw {
-  margin-left: var(--toolbar-width);
+  overflow: hidden;
+  border: 4px solid blue;
+  /* margin-left: var(--toolbar-width); */
 }
 
 #toolbar {
   position: fixed;
-  height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   width: var(--toolbar-width);
