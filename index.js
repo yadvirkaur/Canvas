@@ -5,6 +5,7 @@ const ctx = canvas.getContext("2d");
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    
   }
   resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
@@ -26,9 +27,12 @@ function draw(e){
     ctx.moveTo(lastX,lastY);
 
     if (e.touches) {  //e.touches[0] refers to the first touch point in the array, which is the first touch point that was detected. 
-        ctx.lineTo(e.touches[0].clientX, e.touches[0].clientY);
-        lastX = e.touches[0].clientX;
-        lastY = e.touches[0].clientY;
+        // const rect = canvas.getBoundingClientRect();
+        const touchX = e.touches[0].clientX;
+        const touchY = e.touches[0].clientY;
+        ctx.lineTo(touchX, touchY);
+        lastX = touchX;
+        lastY = touchY;
       } else {
         ctx.lineTo(e.offsetX,e.offsetY);
       lastX = e.offsetX;
@@ -58,6 +62,7 @@ canvas.addEventListener('mousedown', (e) => {
   });
   
 canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
     isDrawing = true;
     [lastX, lastY] = [e.touches[0].clientX, e.touches[0].clientY];
 });
