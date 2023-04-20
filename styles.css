@@ -25,10 +25,8 @@ body {
 }
 
 #draw {
-  border-radius: 8px;
-  box-shadow: 0 0 10px #888888;
-  overflow: hidden;
-  margin: 2%;
+  /* border: 2px solid blue; */
+  /* overflow: hidden; dont make it hidden it mess up the cordinates */
 }
 
 #toolbar {
@@ -37,7 +35,7 @@ body {
   flex-direction: column;
   width: var(--toolbar-width);
   padding-inline: 10px;
-  /* box-shadow: 0 0 10px #888888; */
+  box-shadow: 0 0 10px #888888;
 }
 
 .logo {
@@ -77,4 +75,5 @@ body {
   border-radius: 4px;
   color: white;
   padding: 6px;
+  margin-bottom: 20px;
 }

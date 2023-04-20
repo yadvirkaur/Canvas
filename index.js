@@ -67,7 +67,7 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 }
 resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
+// window.addEventListener('resize', resizeCanvas); resizing loses content.
 
 ctx.linejoin = 'round';
 ctx.lineCap = 'round';
@@ -143,4 +143,14 @@ toolbar.addEventListener('click', (e) => {
   if (e.target.id === 'clear') {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
+});
+
+const saveButton = document.getElementById("save-button");
+
+saveButton.addEventListener("click", () => {
+  const dataURL = canvas.toDataURL("image/png");
+  const link = document.createElement("a");
+  link.download = "canvas.png";
+  link.href = dataURL;
+  link.click();
 });
